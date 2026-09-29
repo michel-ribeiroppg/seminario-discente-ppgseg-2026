@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>I Seminário Discente | PPGSeg/UFRGS</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            color: #1f2937;
+            background: #ffffff;
+            line-height: 1.6;
+        }
+
+        /* MENU */
+        header {
+            background: #ffffff;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: auto;
+            padding: 15px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .marca {
+            font-weight: bold;
+            font-size: 18px;
+            color: #163b65;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 600;
+        }
+
+        nav a:hover {
+            color: #163b65;
+        }
+
+        /* CAPA */
+        .hero {
+            min-height: 82vh;
+            background: linear-gradient(135deg, #102f52, #1d5684);
+            color: white;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 60px 30px;
+        }
+
+        .hero-conteudo {
+            max-width: 1150px;
+            width: 100%;
+
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .hero-logo {
+            text-align: center;
+        }
+
+        .hero-logo img {
+            max-width: 470px;
+            width: 100%;
+            border-radius: 16px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+        }
+
+        .hero-texto .tag {
+            display: inline-block;
+            background: rgba(255,255,255,0.15);
+            padding: 7px 14px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .hero h2 {
+            font-size: 21px;
+            font-weight: normal;
+            margin-bottom: 25px;
+            opacity: 0.95;
+        }
+
+        .dados-evento {
+            margin: 25px 0;
+            font-size: 17px;
+        }
+
+        .botoes {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .botao {
+            display: inline-block;
+            padding: 13px 24px;
+            border-radius: 7px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .botao-principal {
+            background: white;
+            color: #163b65;
+        }
+
+        .botao-secundario {
+            border: 2px solid white;
+            color: white;
+        }
+
+        /* SEÇÕES */
+        section {
+            padding: 80px 30px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .titulo-secao {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .titulo-secao h2 {
+            color: #163b65;
+            font-size: 34px;
+            margin-bottom: 10px;
+        }
+
+        .titulo-secao p {
+            color: #64748b;
+        }
+
+        /* SOBRE */
+        #sobre {
+            background: #f5f7fa;
+        }
+
+        .sobre-texto {
+            max-width: 850px;
+            margin: auto;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        /* MESAS */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .card {
+            background: white;
+            padding: 28px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            border-top: 5px solid #1d5684;
+        }
+
+        .card h3 {
+            color: #163b65;
+            margin-bottom: 12px;
+        }
+
+        /* PROGRAMAÇÃO */
+        #programacao {
+            background: #f5f7fa;
+        }
+
+        .programacao-box {
+            max-width: 850px;
+            margin: auto;
+            background: white;
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+        }
+
+        .programacao-box h3 {
+            color: #163b65;
+            margin-bottom: 20px;
+        }
+
+        .horario {
+            padding: 18px 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .horario strong {
+            color: #163b65;
+        }
+
+        /* INSCRIÇÕES */
+        #inscricoes {
+            text-align: center;
+        }
+
+        /* RODAPÉ */
+        footer {
+            background: #102f52;
+            color: white;
+            text-align: center;
+            padding: 35px 20px;
+        }
+
+        /* CELULAR */
+        @media (max-width: 800px) {
+
+            nav ul {
+                display: none;
+            }
+
+            .hero-conteudo {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero-logo img {
+                max-width: 350px;
+            }
+
+            .botoes {
+                justify-content: center;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <nav>
+        <div class="marca">PPGSeg | UFRGS</div>
+
+        <ul>
+            <li><a href="#inicio">Início</a></li>
+            <li><a href="#sobre">Sobre</a></li>
+            <li><a href="#mesas">Mesas Temáticas</a></li>
+            <li><a href="#programacao">Programação</a></li>
+            <li><a href="#inscricoes">Inscrições</a></li>
+        </ul>
+    </nav>
+</header>
+
+
+<section class="hero" id="inicio">
+
+    <div class="hero-conteudo">
+
+        <div class="hero-logo">
+            <img src="Logo Seminario PPGSeg.jpg"
+                 alt="I Seminário Discente do PPGSeg">
+        </div>
+
+        <div class="hero-texto">
+
+            <span class="tag">
+                Programa de Pós-Graduação em Segurança Cidadã
+            </span>
+
+            <h1>
+                I Seminário Discente
+            </h1>
+
+            <h2>
+                Programa de Pós-Graduação em Segurança Cidadã – PPGSeg/UFRGS
+            </h2>
+
+            <div class="dados-evento">
+                <p>📍 Universidade Federal do Rio Grande do Sul</p>
+                <p>🎓 Evento acadêmico</p>
+                <p>💻 Atividades presenciais e virtuais</p>
+            </div>
+
+            <div class="botoes">
+                <a href="#programacao" class="botao botao-principal">
+                    Ver programação
+                </a>
+
+                <a href="#inscricoes" class="botao botao-secundario">
+                    Inscrições
+                </a>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<section id="sobre">
+
+    <div class="container">
+
+        <div class="titulo-secao">
+            <h2>Sobre o Seminário</h2>
+            <p>Pesquisa, diálogo e produção científica em Segurança Cidadã</p>
+        </div>
+
+        <div class="sobre-texto">
+            <p>
+                O I Seminário Discente do Programa de Pós-Graduação em
+                Segurança Cidadã da Universidade Federal do Rio Grande do Sul
+                constitui espaço acadêmico destinado ao compartilhamento de
+                pesquisas, experiências e reflexões desenvolvidas no âmbito
+                do Programa.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+
+<section id="mesas">
+
+    <div class="container">
+
+        <div class="titulo-secao">
+            <h2>Mesas Temáticas</h2>
+            <p>Conheça alguns dos temas que estarão em debate.</p>
+        </div>
+
+        <div class="cards">
+
+            <div class="card">
+                <h3>Violência de Gênero</h3>
+                <p>
+                    Desafios para a Segurança Cidadã e para as instituições
+                    de proteção.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>Condições de Trabalho, Saúde e Qualidade de Vida de Policiais</h3>
+                <p>
+                    Reconhecimento social, instituições policiais e
+                    Segurança Cidadã.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>Racismo e Seletividade Penal</h3>
+                <p>
+                    Reflexões sobre seus impactos na Segurança Cidadã.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>Facções Criminosas e Territórios Vulneráveis</h3>
+                <p>
+                    Repressão, prevenção, políticas sociais e os desafios
+                    contemporâneos da Segurança Cidadã.
+                </p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<section id="programacao">
+
+    <div class="container">
+
+        <div class="titulo-secao">
+            <h2>Programação</h2>
+            <p>A programação completa será apresentada nesta seção.</p>
+        </div>
+
+        <div class="programacao-box">
+
+            <h3>I Seminário Discente do PPGSeg</h3>
+
+            <div class="horario">
+                <strong>Abertura</strong>
+                <p>Apresentação do Programa de Pós-Graduação em Segurança Cidadã.</p>
+            </div>
+
+            <div class="horario">
+                <strong>Homenagem</strong>
+                <p>Exibição de homenagem especial.</p>
+            </div>
+
+            <div class="horario">
+                <strong>Mesas Temáticas</strong>
+                <p>
+                    Apresentações dos discentes e debates com pesquisadores
+                    e convidados.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
+<section id="inscricoes">
+
+    <div class="container">
+
+        <div class="titulo-secao">
+            <h2>Inscrições</h2>
+            <p>Participe do I Seminário Discente do PPGSeg.</p>
+        </div>
+
+        <p>
+            As informações e o formulário de inscrição serão disponibilizados
+            neste espaço.
+        </p>
+
+    </div>
+</section>
+
+
+<footer>
+    <p>
+        <strong>I Seminário Discente do PPGSeg</strong>
+    </p>
+
+    <p>
+        Programa de Pós-Graduação em Segurança Cidadã – UFRGS
+    </p>
+</footer>
+
+</body>
+</html>
