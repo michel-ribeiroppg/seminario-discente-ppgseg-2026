@@ -451,17 +451,76 @@
 
     <div class="container">
 
-        <div class="titulo-secao">
-            <h2>Inscrições</h2>
-            <p>Participe do I Seminário Discente do PPGSeg.</p>
-        </div>
-
-        <p>
-            As informações e o formulário de inscrição serão disponibilizados
-            neste espaço.
-        </p>
-
+    <div class="titulo-secao">
+        <h2>Inscrições</h2>
+        <p>Inscreva-se no I Seminário Discente do PPGSeg/UFRGS.</p>
     </div>
+
+    <form id="formInscricao">
+
+        <label>Nome completo *</label>
+        <input type="text" name="nome" required>
+
+        <label>E-mail *</label>
+        <input type="email" name="email" required>
+
+        <label>Instituição/Órgão *</label>
+        <input type="text" name="instituicao" required>
+
+        <label>Vínculo *</label>
+        <select name="vinculo" required>
+            <option value="">Selecione</option>
+            <option>Discente</option>
+            <option>Docente</option>
+            <option>Pesquisador(a)</option>
+            <option>Profissional da Segurança Pública</option>
+            <option>Comunidade externa</option>
+            <option>Outro</option>
+        </select>
+
+        <label>Cidade *</label>
+        <input type="text" name="cidade" required>
+
+        <label>UF *</label>
+        <input type="text" name="uf" maxlength="2" required>
+
+        <label>Modalidade de participação *</label>
+        <select name="modalidade" required>
+            <option value="">Selecione</option>
+            <option>Presencial</option>
+            <option>Virtual</option>
+            <option>Presencial e virtual</option>
+        </select>
+
+        <label>Dias de participação *</label>
+        <select name="dias" required>
+            <option value="">Selecione</option>
+            <option>09 de novembro</option>
+            <option>10 de novembro</option>
+            <option>11 de novembro</option>
+            <option>09, 10 e 11 de novembro</option>
+        </select>
+
+        <label>Nome para constar no certificado *</label>
+        <input type="text" name="nomeCertificado" required>
+
+        <label>
+            <input type="checkbox" name="autorizacao" value="Sim" required>
+            Autorizo o tratamento dos dados informados para fins de inscrição,
+            controle de presença e emissão de certificado do evento.
+        </label>
+
+        <br><br>
+
+        <button type="submit" class="botao botao-principal">
+            Realizar inscrição
+        </button>
+
+        <p id="mensagemInscricao"></p>
+
+    </form>
+
+</div>
 </section>
 
 
@@ -474,6 +533,54 @@
         Programa de Pós-Graduação em Segurança Cidadã – UFRGS
     </p>
 </footer>
+<script>
+const FORM_URL = "https://script.google.com/macros/s/AKfycby-ui4OlTzGHdddfJ1nCMf-pxpRkBr-7myY3GK9IoCwQDlChYHL0D9uL9qWkpzxwyrqWQ/exec";
 
+document.getElementById("formInscricao").addEventListener("submit", async function(event) {
+    event.preventDefault();
+
+    const formulario = event.target;
+    const mensagem = document.getElementById("mensagemInscricao");
+    const botao = formulario.querySelector('button[type="submit"]');
+
+    const dados = {
+        nome: formulario.nome.value.trim(),
+        email: formulario.email.value.trim(),
+        instituicao: formulario.instituicao.value.trim(),
+        vinculo: formulario.vinculo.value,
+        cidade: formulario.cidade.value.trim(),
+        uf: formulario.uf.value.trim().toUpperCase(),
+        modalidade: formulario.modalidade.value,
+        dias: formulario.dias.value,
+        nomeCertificado: formulario.nomeCertificado.value.trim(),
+        autorizacao: formulario.autorizacao.checked ? "Sim" : "Não"
+    };
+
+    mensagem.textContent = "Enviando inscrição...";
+    botao.disabled = true;
+
+    try {
+        const resposta = await fetch(FORM_URL, {
+            method: "POST",
+            body: JSON.stringify(dados)
+        });
+
+        const resultado = await resposta.json();
+
+        if (resultado.sucesso) {
+            mensagem.textContent = "Inscrição realizada com sucesso! Você está inscrito(a) no I Seminário Discente do PPGSeg/UFRGS.";
+            formulario.reset();
+        } else {
+            mensagem.textContent = resultado.mensagem || "Não foi possível realizar a inscrição.";
+        }
+
+    } catch (erro) {
+        console.error(erro);
+        mensagem.textContent = "Não foi possível enviar a inscrição. Tente novamente.";
+    } finally {
+        botao.disabled = false;
+    }
+});
+</script>
 </body>
 </html>
